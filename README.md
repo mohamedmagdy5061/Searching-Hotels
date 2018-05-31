@@ -7,7 +7,7 @@ Can searching to hotels by user start date to end date for find what hotel you n
 ### How to setup
 1. Clone the repo:
 ```ssh
-https://github.com/mohamedmagdy5061/hotels.git
+https://github.com/mohamedmagdy5061/Searching-Hotels.git
 ```
 
 2. Install packages:
