@@ -17,7 +17,7 @@ npm install -g @angular/cli
 
 3. Install Dependence:
 ```ssh
-$ cd hotels
+$ cd Searching-Hotels
 ```
 ```ssh
 npm install
