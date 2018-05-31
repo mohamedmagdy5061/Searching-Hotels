@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="row ">
+      <div class="card col-12">
+          <div class="card-header text-center">
+              Seaching Hotels
+          </div>
+          <!-- ############################# Alert message #############################  -->
+          <ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">"End Date Must Be Biggest Than Start Date"!</ngb-alert>
+          <!-- #############################start code for select date for searching#############################  -->
+      <div class="row">
+        <label class="col-4">start
+            <div class="form-group">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="start" #c2="ngModel"  ngbDatepicker #d="ngbDatepicker">
+                <button class="input-group-addon" (click)="d.toggle()" type="button">
+                  <img src="/assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> 
+                </button>
+              </div>
+            </div>
+          </label> 
+          <label class="col-4">end
+            <div class="form-group">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="end" ngbDatepicker #d1="ngbDatepicker">
+                <button class="input-group-addon" (click)="d1.toggle()" type="button">
+                    <img src="/assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> 
+                </button>
+              </div>
+            </div>
+        </label>
+         <!-- !!!!!!!!!!!!!!!!! seach button !!!!!!!!!!!!!!!!!!!!!! -->
+        <div class=" d-block mx-auto butSerch">
+          <button class="btn btn-primary" type="submit" (click)="Search();totalNight()"> search</button>
+        </div>
+      </div>
+          <!-- ############################# end code for select date for searching#############################  -->
+    </div>
+
+  </div>
+</div>
+  <br>
+    <br>
+      <br>
+
+<div class="container">
+    <div class="card">
+      <div class="card-header text-center">
+        Hotel listing
+      </div>
+      <div class="row">
+        <!-- ################### display total night ###################### -->
+        <div class="col">
+          <strong>Total Nights:</strong>
+            {{days}} 
+        </div>
+        <!-- ########################### button to sort by name & by price ########################## -->        
+        <div class="col text-right">
+          <button type="button" class="btn btn-secondary btn-sm" [disabled]="empty" (click)="sortByName()">Sort by Name</button>
+          <button type="button" class="btn btn-secondary btn-sm" [disabled]="empty" (click)="sortByPrice()">Sort by Price</button>      
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-3 text-center">
+        <!-- ########################### Filtering by name  ########################## -->            
+          <div>
+              <form action="" class="search-form">
+                <div class="form-group has-feedback">
+                  <label for="search" class="sr-only">Search</label>
+                  <input type="text" class="form-control search2" name="search"  [(ngModel)]="filterVal" (keyup)="searchByName(filterVal)"  placeholder="search by name">
+                  <span><i class="fa fa-search  glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></i></span>
+                </div>
+              </form>
+          </div> 
+          <!-- ########################### Filtering by Price  ########################## -->            
+          <div class="slidecontainer">
+              <div class="priceFilter">Price Filter</div>
+              <input type="range" [min]="min" [max]="max" [disabled]="empty" [value]="20"[(ngModel)]="endValue" (change)="valueChanged()" class="slider">
+          </div>
+        </div>
+        <!-- ########################### display the search results ########################## -->        
+        <div class="col-9 text-center">
+            <div *ngFor="let res of result ; let i=index" class="card items col-xs-12 col-sm-5 col-md-4 " >
+                <img  class="card-img-top" src="/assets/img/hotels.png" alt="Hotels Image">
+                <div class="card-body">
+                  <h5 class="card-title overflowfont">Name: {{res.name}}</h5>
+                  <p class="card-text overflowfont"> City: {{res.city}}</p>
+                  <h2 class="sizePrice"><i class="fa fa-money" aria-hidden="true"></i> Price: {{res.price | currency:"GBP":"1"}}</h2>
+                  <hr>
+                </div>
+              </div>
+        </div>             
+      </div>
+    </div>
+</div>
